@@ -1,0 +1,41 @@
+<%- include("partials/header.ejs") %> 
+
+<body>
+
+<%- include("partials/navbar.ejs") %> 
+
+    <div class="news-container ">
+        <div class="news ">
+
+            <% articles.forEach(function(article,index){ %>
+
+                <% if ((typeof article.url=='object') || (typeof article.title=='object') || (typeof article.urlToImage=='object') || (typeof article.content=='object')){ %>
+                    <% } else{ %>
+                        <a href="<%- article.url %>" target="_blank" class="news-box Hover-effect">
+
+                            <img src="<%- article.urlToImage %>" alt="Image">
+                            <h3>
+                                <%- article.title %>
+                            </h3>
+
+
+                            <p>
+                                <%- article.content.replace(/<[^>]+>/g, '') %>
+                            </p>
+                            <br>
+                            <p style="margin-bottom: 0px; position: absolute; right: 0; bottom: 0; font-family: ui-monospace;">Updated: <span style="color:red;" ><%- new Date(article.publishedAt.slice(0,10)).toDateString() %>    <%- moment.utc(article.publishedAt).local().format('hh : mm A') %> </span></p>
+
+
+                        </a>
+                        <% } %>
+                        <% }) %>
+        </div>
+    </div>
+    <script src="moment.js"></script>
+<script src="moment-timezone-with-data.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
